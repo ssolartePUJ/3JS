@@ -13,6 +13,7 @@
 		<script>
 	
 			const scene = new THREE.Scene();
+			scene.background = new THREE.Color( 0xe9e9e9 );
 			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
 			const renderer = new THREE.WebGLRenderer();
@@ -28,7 +29,7 @@
 			var geometry = new THREE.BoxGeometry( 1, 1, 1 );
 			var material = new THREE.MeshNormalMaterial();
 			var cube = new THREE.Mesh( geometry, material );
-			scene.add( cube );
+			//scene.add( cube );
 
 			camera.position.z = 10;
 			
@@ -43,25 +44,92 @@
 			
 			var sphere = new THREE.Mesh( geo, materials );
 			sphere.position.x = -5;
-			scene.add( sphere );
+			//scene.add( sphere );
 
 	
 			var loader = new THREE.ObjectLoader();
 			
-			loader.load("geometry.json", function( group ) {
+			//place green island ground
+			loader.load("Assets/island.json", function( group ) {
 			mesh = group.children[0];
-				mesh.material = new THREE.MeshPhongMaterial({color: 0xE9E9E9, specular: 0x333333, shininess: 15, map: texture})
-				mesh.position.x = 5;
+				mesh.material = new THREE.MeshPhongMaterial({color: 0xE9E9E9, specular: 0x333333, shininess: 15});
+				mesh.material.color.setHex(0x94D893 );
+				mesh.scale.set(10, 10, 10);
+				mesh.position.x = 0;
 				scene.add( mesh );
-			});			
+			});
+
+			//place brown idland ground
+			loader.load("Assets/island.json", function( group ) {
+			mesh = group.children[0];
+				mesh.material = new THREE.MeshPhongMaterial({color: 0xE9E9E9, specular: 0x333333, shininess: 15});
+				mesh.material.color.setHex(0xffbf00  );
+				mesh.scale.set(10.5, 9, 10);
+				mesh.position.y = 0.1;
+				scene.add( mesh );
+			});				
+			
+			//place monutain
+			loader.load("Assets/mountain.json", function( group ) {
+			mesh = group.children[0];
+				//mesh.material = new THREE.MeshPhongMaterial({ color: 0xE9E9E9, specular: 0x333343, shininess: 15, map: texture});
+				mesh.material.color.setHex(0xdbc1ac );
+				mesh.scale.set(10, 10, 10);
+				mesh.position.x = 0;
+				mesh.position.y = 2.8;
+				mesh.position.z = 15;
+				scene.add( mesh );
+			});
+
+			//place little trees
+			loader.load("Assets/tree.json", function( group ) {
+			mesh = group.children[0];
+				mesh.material = new THREE.MeshPhongMaterial({color: 0xE9E9E9, specular: 0x333333, shininess: 15});
+				mesh.material.color.setHex(0x065535  );
+				mesh.scale.set(20, 20, 20);
+				mesh.position.x = -6;
+				mesh.position.z = 100;
+				mesh.position.y = -5;
+				scene.add( mesh );
+			});
+			loader.load("Assets/tree.json", function( group ) {
+			mesh = group.children[0];
+				mesh.material = new THREE.MeshPhongMaterial({color: 0xE9E9E9, specular: 0x333333, shininess: 15});
+				mesh.material.color.setHex(0x065535  );
+				mesh.scale.set(20, 20, 20);
+				mesh.position.x = 3;
+				mesh.position.z = 100;
+				mesh.position.y = -5;
+				scene.add( mesh );
+			});
+			loader.load("Assets/tree.json", function( group ) {
+			mesh = group.children[0];
+				mesh.material = new THREE.MeshPhongMaterial({color: 0xE9E9E9, specular: 0x333333, shininess: 15});
+				mesh.material.color.setHex(0x065535  );
+				mesh.scale.set(20, 20, 20);
+				mesh.position.x = 0;
+				mesh.position.z = 109;
+				mesh.position.y = -5;
+				scene.add( mesh );
+			});
+
+			
+
+
+
+
+			const planeGeometry = new THREE.PlaneGeometry( 500,500 );
+			const PlaneMaterial = new THREE.MeshBasicMaterial( {color: 0x0067b1 , side: THREE.DoubleSide} );
+			const plane = new THREE.Mesh( planeGeometry, PlaneMaterial );
+			plane.rotation.x =1.59;
+			scene.add( plane );
+
+
 			
 
 
 			function animate() {
 				requestAnimationFrame( animate );
-
-				cube.rotation.x += 0.01;
-				cube.rotation.y += 0.01;
 
 				renderer.render( scene, camera );
 			}
@@ -83,6 +151,22 @@
 					case 40: // down arrow key
 						// Handle down arrow key (move camera backward)
 						camera.position.y -= 1;
+						break;
+					case 81: // Q key
+						// Handle Q key (rotate camera left around Y-axis)
+						camera.rotation.y += 0.1; // You can adjust the rotation speed as needed
+						break;
+					case 69: // E key
+						// Handle E key (rotate camera right around Y-axis)
+						camera.rotation.y -= 0.1; // You can adjust the rotation speed as needed
+						break;
+					case 90: // Z key
+						// Handle Z key (zoom in)
+						camera.position.z -= 1; // You can adjust the zoom speed as needed
+						break;
+					case 67: // C key
+						// Handle C key (zoom out)
+						camera.position.z += 1; // You can adjust the zoom speed as needed
 						break;
 					default:
 						// Handle other keys or do nothing
