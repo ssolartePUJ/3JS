@@ -116,13 +116,95 @@
 			loader.load("Assets/umbrella.json", function( group ) {
 			mesh = group.children[0];
 				mesh.material = new THREE.MeshPhongMaterial({color: 0xE9E9E9, specular: 0x333333, shininess: 15});
-				mesh.material.color.setHex(0xCBBEB5   );
-				mesh.scale.set(0.1, .1, .1);
+				mesh.material.color.setHex(0x7F00FF   );
+				mesh.scale.set(0.5, .5, .5);
 				mesh.position.x = 0;
-				mesh.position.z = 0;
-				mesh.position.y = 5;
+				mesh.position.z = -56;
+				mesh.position.y = 2.5;
 				scene.add( mesh );
 			});
+			loader.load("Assets/umbrella.json", function( group ) {
+			mesh = group.children[0];
+				mesh.material = new THREE.MeshPhongMaterial({color: 0xE9E9E9, specular: 0x333333, shininess: 15});
+				mesh.material.color.setHex(0xFF07FF   );
+				mesh.scale.set(0.5, .5, .5);
+				mesh.position.x = 7;
+				mesh.position.z = -58;
+				mesh.position.y = 2.5;
+				scene.add( mesh );
+			});
+			loader.load("Assets/umbrella.json", function( group ) {
+			mesh = group.children[0];
+				mesh.material = new THREE.MeshPhongMaterial({color: 0xE9E9E9, specular: 0x333333, shininess: 15});
+				mesh.material.color.setHex(0x00FF40 );
+				mesh.scale.set(0.5, .5, .5);
+				mesh.position.x =14;
+				mesh.position.z = -55;
+				mesh.position.y = 2.5;
+				scene.add( mesh );
+			});
+			loader.load("Assets/boat.json", function( group ) {
+			mesh = group.children[0];
+				mesh.material = new THREE.MeshPhongMaterial({color: 0xE9E9E9, specular: 0x333333, shininess: 15});
+				mesh.material.color.setHex(0xCBBEB5   );
+				mesh.scale.set(1.5, .9, .25);
+				mesh.position.x = 0;
+				mesh.position.z = -50;
+				mesh.position.y = 1;
+				scene.add( mesh );
+			});
+			loader.load("Assets/boat.json", function(group) {
+			// Primer instancia
+			var mesh1 = group.children[0].clone();
+			mesh1.material = new THREE.MeshPhongMaterial({color: 0xFFFFFF, specular: 0x333333, shininess: 15});
+			mesh1.scale.set(1.5, .9, .25);
+			mesh1.position.x = 13;
+			mesh1.position.z = -50;
+			mesh1.position.y = 1;
+			mesh1.rotation.y = Math.PI / 4; // Rotar 45 grados en el eje Y
+			scene.add(mesh1);
+
+			// Segunda instancia
+			var mesh2 = group.children[0].clone();
+			mesh2.material = new THREE.MeshPhongMaterial({color: 0xFFFFFF, specular: 0x333333, shininess: 15});
+			mesh2.scale.set(1.5, .9, .25);
+			mesh2.position.x = -13; // Cambiar la posición en X para que estén uno frente al otro
+			mesh2.position.z = -50;
+			mesh2.position.y = 1;
+			mesh2.rotation.y = -Math.PI / 4; // Rotar en la dirección opuesta
+			scene.add(mesh2);
+		});
+
+			loader.load("Assets/boat.json", function(group) {
+			mesh = group.children[0];
+			mesh.material = new THREE.MeshPhongMaterial({color: 0xE9E9E9, specular: 0x333333, shininess: 15});
+			mesh.material.color.setHex(0xCBBEB5);
+			mesh.scale.set(1.5, .9, .25);
+			mesh.position.x = 13;
+			mesh.position.z = -50;
+			mesh.position.y = 1;
+
+			// Rotar en el eje Y (en radianes)
+			mesh.rotation.y = Math.PI / 4; // Rotar 45 grados
+
+			scene.add(mesh);
+		});
+
+		loader.load("Assets/giantMonster.json", function(group) {
+			mesh = group.children[0];
+			mesh.material = new THREE.MeshPhongMaterial({color: 0xE9E9E9, specular: 0x333333, shininess: 15});
+			mesh.material.color.setHex(0x75553F);
+			mesh.material.map = texture;
+			mesh.normalMap = texture1;
+
+			mesh.scale.set(0.3, 0.1, .25);
+			mesh.position.x = 13;
+			mesh.position.z = -20;
+			mesh.position.y = -2;
+			scene.add(mesh);
+		});
+
+
 
 			
 
